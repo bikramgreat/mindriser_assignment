@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Registration Page</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Register a new membership</p>
+
+      <form action="../../index.html" method="post">
+        @csrf
+        <div class="form-group has-feedback">
+          <label>Name  <span style="color: red">*</span> :</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Full Name" value="{{old('name')}}" required name="name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-asterisk"></span>
+              </div>
+            </div>
+            <div class="form_error_p" id="form_error_first_name">
+              @if ($errors->has('name'))
+              <span class="text-danger">{{ $errors->first('name') }}</span>
+              @endif
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback">
+          <label>Contact Address  <span style="color: red">*</span> :</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Contact Address" name="contactAddress" value="{{old('contactAddress')}}" required  name="contactAddress">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-map-marker"></span>
+              </div>
+            </div>
+            <div class="form_error_p" id="form_error_contact_address">
+              @if ($errors->has('contactAddress'))
+              <span class="text-danger">{{ $errors->first('contactAddress') }}</span>
+              @endif
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group has-feedback">
+          <label>phone number:</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            </div>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number " name="phoneNumber" value="{{old('phoneNumber')}}" oninput="phone_validation('phoneNumber','form_error_phone_no')" required  name="phoneNumber" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']">
+
+            <div class="form_error_p" id="form_error_phone_no">
+              @if ($errors->has('phoneNumber'))
+              <span class="text-danger">{{ $errors->first('phoneNumber') }}</span>
+              @endif
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group has-feedback">
+          <label>contact Email:</label>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email')}}" oninput="email_vlidation('contactEmail','form_error_email')">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+            <div class="form_error_p" id="form_error_email">
+              @if ($errors->has('email'))
+              <span class="text-danger">{{ $errors->first('contactEmail') }}</span>
+              @endif
+            </div>
+          </div>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group has-feedback">
+          <label id="label_password">Password<span style="color: red">*</span> :</label>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password" value="" required oninput="password_strangth('password')">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div class="form_error_p" id="form_error_password">
+              @if ($errors->has('password'))
+              <span class="text-danger">{{ $errors->first('Password') }}</span>
+              @endif
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="form-group has-feedback">
+          <label>Retype password  <span style="color: red">*</span> :</label>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Retype password" name="password_confirmation" value="" oninput="password_conformation_check('password','repassword','form_error_repassword')" >
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div class="form_error_p" id="form_error_repassword"><p></p></div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="termAccepted" name="termAccepted">
+              <label for="termAccepted">
+               I agree to the <a href="#">terms</a>
+              </label>
+            </div>
+            <div class="form_error_p" id="form_error_agree_check_box">
+              @if ($errors->has('termAccepted'))
+              <span class="text-danger">{{ $errors->first('termAccepted') }}</span>
+              @endif
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i>
+          Sign up using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i>
+          Sign up using Google+
+        </a>
+      </div>
+
+      <a href="login.html" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+</body>
+</html>
