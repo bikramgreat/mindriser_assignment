@@ -69,7 +69,7 @@ class KycController extends Controller
             $fileExtension=$request->file('citizenship_doc')->extension();
             $filename=Auth::user()->id.Auth::user()->name.'.'.$fileExtension;
             $file->move($destinationPath, $filename);
-            $this->kyc->photo=$destinationPath.'/'.$filename;
+            $this->kyc->citizenship=$destinationPath.'/'.$filename;
         }
 
         if($request->hasFile('photo')){
@@ -79,13 +79,13 @@ class KycController extends Controller
             $fileExtension=$request->file('photo')->extension();
             $filename=Auth::user()->id.Auth::user()->name.'.'.$fileExtension;
             $file->move($destinationPath, $filename);
-            $this->kyc->citizenship=$destinationPath.'/'.$filename;
+            $this->kyc->photo=$destinationPath.'/'.$filename;
         }
 
         if($this->kyc-> save())
         {
             //if kyc data is saved
-            return redirect('kyc/profile/'.Auth::id());
+            return redirect('kyc/profile');
         }
 
         else
@@ -113,8 +113,10 @@ class KycController extends Controller
      */
     public function edit($id)
     {
+        //edit status of the kyc table
         if($this->kyc->where('id',$id)->update(['status'=>1]))
         {
+            //redirecting to dashboard
             return redirect('dashboard');
         }
 
@@ -145,6 +147,7 @@ class KycController extends Controller
 
     public function profile()
     {
+        //get kyc data of the user
         $kyc=$this->kyc->where('user_id',Auth::user()->id)->get();
         return view('kyc.profile',compact('kyc'));
     }

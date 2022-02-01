@@ -56,7 +56,7 @@
 <div class="register-box">
     <div class="register-logo">
         <a href="index2.html" class="logo">
-            <span class="logo-lg"><b>BuyAndSell</b>Saman</span>
+            <span class="logo-lg"></span>
         </a>
     </div>
 

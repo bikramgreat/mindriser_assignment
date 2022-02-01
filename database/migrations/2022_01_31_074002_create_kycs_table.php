@@ -23,7 +23,7 @@ class CreateKycsTable extends Migration
             $table->string('education_per');
             $table->string('photo');
             $table->string('citizenship');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

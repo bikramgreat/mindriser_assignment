@@ -12,6 +12,7 @@ class AuthenticationController extends Controller
 {
     public function login(Request $request)
     {
+        //setting credentials
         $credentials_email_password=[
             'email'=>$request->email,
             'password'=>$request->password
@@ -19,9 +20,9 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt($credentials_email_password)) {
             // Authentication passed...
-            $kyc=new Kyc();
-            $kyc_detail=$kyc->where('user_id','=',Auth::user()->id)->get();
-            return redirect()->intended('dashboard')->with(['kyc'=>$kyc_detail]);
+//            $kyc=new Kyc();
+//            $kyc_detail=$kyc->where('user_id','=',Auth::user()->id)->get();
+            return redirect('dashboard');
         }
         else
         {
@@ -57,8 +58,9 @@ class AuthenticationController extends Controller
     public function dashboard()
     {
         $kyc=new Kyc();
-        $user_kyc=$kyc->where('user_id',Auth::user()->id);
         $kycs=$kyc->get();
+        $user_kyc=$kyc->where('user_id',Auth::user()->id)->get();
+
         return view('dashboard.user_dashboard',compact('user_kyc','kycs'));
     }
 

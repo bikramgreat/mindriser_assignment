@@ -1,7 +1,8 @@
 @extends("dashboard_layout.dashboard")
 @section('content')
     @if(\Illuminate\Support\Facades\Auth::user()->user_type_id==2)
-        @if(empty($user_kyc))
+{{--        fsadfasdf dfasdfasd dfsaf{{count($user_kyc)}}--}}
+        @if(count($user_kyc)==0)
             <div class="col-lg-4">
 
             </div>
@@ -51,7 +52,39 @@
                                             <td>{{$kyc->address}}</td>
                                             <td>{{$kyc->phone}}</td>
                                             <td>{{$kyc->education}}({{$kyc->education_per}})</td>
-                                            <td>{{$kyc->citizenship}}</td>
+                                            <td>
+
+
+                                                <button type="button" class="btn btn-default btn-info" data-toggle="modal" data-target="#modal-xl{{$kyc->id}}">
+                                                    view citizenship document
+                                                </button>
+
+
+                                                <div class="modal fade" id="modal-xl{{$kyc->id}}">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Citizenship </h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <iframe src="{{url($kyc->citizenship)}}" style="width:1000px; height:1000px;" frameborder="0">
+
+                                                                </iframe>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                            </td>
                                             <td>{{$kyc->status}}</td>
                                             <td>
                                                 @if($kyc->status==0)
@@ -64,7 +97,7 @@
                                 <tfoot>
 
                                 </tfoot>
-                            </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                            </table>
             </div>
             <!-- /.card-body -->
         </div>

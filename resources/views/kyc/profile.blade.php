@@ -15,9 +15,9 @@
                         <b>status</b>
                         <a class="float-right">
                             @if($kyc[0]->status==1)
-                                <p style="color: green">Active</p>
+                                <p style="color: green">accepted</p>
                             @else
-                                <p style="color: red">Not Active</p>
+                                <p style="color: red">Not accepted</p>
                             @endif
 
                         </a>
